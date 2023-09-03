@@ -7,5 +7,4 @@ import ro.siit.springBootDemo.model.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-
 }

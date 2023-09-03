@@ -14,7 +14,8 @@ public class StudentService {
     @Value("${maxResults}")
     private long maxResults;
 
-    private final StudentRepository studentRepository;
+    private StudentRepository studentRepository;
+
     public List<StudentDto> findAllStudents() {
         return studentRepository
                 .findAll()

@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HelloWorldController {
 
-    private final StudentService studentService;
+    private StudentService studentService;
     @Value("${helloMessage}")
     private String message;
 
@@ -31,11 +31,17 @@ public class HelloWorldController {
 
     @Tag(name = "Students API", description = "This method fetches all students from the database")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(examples = {}, schema = @Schema(implementation = Student.class), mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", description = "The Tutorial with given Id was not found.", content = { @Content(schema = @Schema()) })
+            @ApiResponse(responseCode = "200",
+                    content = { @Content(examples = {},
+                            schema = @Schema(implementation = Student.class),
+                            mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404",
+                    description = "The Tutorial with given Id was not found.",
+                    content = { @Content(schema = @Schema()) })
     })
     @GetMapping("/students")
     public List<StudentDto> getStudents() {
+
         return studentService.findAllStudents();
     }
 
