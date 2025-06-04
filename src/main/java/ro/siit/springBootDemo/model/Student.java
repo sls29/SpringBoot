@@ -1,24 +1,24 @@
 package ro.siit.springBootDemo.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Getter
-@Setter
-@ToString
+
 @Entity
 @Table(name = "students")
-public class Student {
+@Inheritance(strategy = InheritanceType.JOINED)
+@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String email;
 
@@ -28,7 +28,7 @@ public class Student {
 //            joinColumns = {@JoinColumn(name = "student_id")},
 //            inverseJoinColumns = {@JoinColumn(name = "course_id")}
 //    )
-////    @Fetch(FetchMode.JOIN)
+//    @Fetch(FetchMode.JOIN)
 //    @ToString.Exclude
 //    @EqualsAndHashCode.Exclude
 //    private List<Course> courses;
@@ -40,20 +40,5 @@ public class Student {
         this.email = email;
     }
 
-    public Student() {
-    }
-
-    public Student(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-//
-//    public String getCoursesAsCsv() {
-//        return getCourses()
-//                .stream()
-//                .map(Course::getName)
-//                .collect(Collectors.joining(", "));
-//    }
-//
 
 }

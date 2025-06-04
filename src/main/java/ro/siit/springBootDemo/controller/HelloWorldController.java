@@ -6,8 +6,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ro.siit.springBootDemo.model.Student;
 import ro.siit.springBootDemo.model.dto.StudentDto;
@@ -20,7 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HelloWorldController {
 
-    private StudentService studentService;
+    @Autowired
+    private StudentService service;
     @Value("${helloMessage}")
     private String message;
 
@@ -33,16 +36,24 @@ public class HelloWorldController {
     @ApiResponses({
             @ApiResponse(responseCode = "200",
                     content = { @Content(examples = {},
-                            schema = @Schema(implementation = Student.class),
-                            mediaType = "application/json") }),
+                        schema = @Schema(implementation = Student.class),
+                        mediaType = "application/json")
+                    }
+            ),
             @ApiResponse(responseCode = "404",
                     description = "The Tutorial with given Id was not found.",
-                    content = { @Content(schema = @Schema()) })
+                    content = { @Content(
+                        schema = @Schema())
+                    }
+            )
     })
     @GetMapping("/students")
-    public List<StudentDto> getStudents() {
-
-        return studentService.findAllStudents();
+    public List<StudentDto> findAllStudents() {
+        return service.findAllStudents();
     }
 
+    @GetMapping("/student")
+    public List<Student> getAllStudents(){
+        return service.getAllStudents();
+    }
 }

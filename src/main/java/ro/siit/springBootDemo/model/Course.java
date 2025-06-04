@@ -1,24 +1,25 @@
 package ro.siit.springBootDemo.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+
 @Entity
 @Table(name = "courses")
+@Inheritance
+@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
-    private int duration;
+    private Integer duration;
 ////    @ManyToOne(fetch = FetchType.EAGER)
 //    @ToString.Exclude
 //    @EqualsAndHashCode.Exclude
