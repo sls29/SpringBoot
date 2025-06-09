@@ -22,16 +22,10 @@ public class Course {
     private Integer id;
     private String name;
     private Integer duration;
-/*
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "students_courses",
-            joinColumns = {@JoinColumn(name = "course_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-    )
-    @Fetch(FetchMode.JOIN)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Student> studentList;
+
+/*    @OneToMany(mappedBy = "courses", fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,  CascadeType.MERGE}, orphanRemoval = true)
+    List<Student> students;
 */
 }
+

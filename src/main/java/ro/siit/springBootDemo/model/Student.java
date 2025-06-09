@@ -28,16 +28,9 @@ public class Student extends User {
     private String lastName;
     private String email;
 
-/*    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "students_courses",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "course_id")}
-    )
-    @Fetch(FetchMode.JOIN)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Course> courses;
+/*    @OneToMany(mappedBy = "students", fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    List<Course> courses;
 */
 
     public Student(int id, String firstName, String lastName, String email) {
