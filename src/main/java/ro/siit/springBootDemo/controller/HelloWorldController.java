@@ -47,12 +47,12 @@ public class HelloWorldController {
                     }
             )
     })
-    @GetMapping("/students")
+    @GetMapping("/details")
     public List<StudentDto> findAllStudents() {
         return service.findAllStudents();
     }
 
-    @GetMapping("/student")
+    @GetMapping("/students")
     public List<Student> getAllStudents(){
         return service.getAllStudents();
     }

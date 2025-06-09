@@ -3,6 +3,8 @@ package ro.siit.springBootDemo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
@@ -14,29 +16,34 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(referencedColumnName = "id")
 
-public class Student {
+public class Student extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    @Column(name = "firstname")
+    private String firstName;
+    @Column(name = "lastname")
+    private String lastName;
     private String email;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "students_courses",
-//            joinColumns = {@JoinColumn(name = "student_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "course_id")}
-//    )
-//    @Fetch(FetchMode.JOIN)
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    private List<Course> courses;
+/*    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "students_courses",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "course_id")}
+    )
+    @Fetch(FetchMode.JOIN)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Course> courses;
+*/
 
-
-    public Student(int id, String name, String email) {
+    public Student(int id, String firstName, String lastName, String email) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
     }
 
